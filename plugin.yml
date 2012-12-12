@@ -1,0 +1,9 @@
+name: QuickDig
+main: com.dustinschreiber.QuickDig.QuickDig
+version: 1.0
+commands:
+   quick:
+      description: (De)Activates QuickDig for the current shovel
+      usage: /quick
+      permission: quickdig.use
+      permission-message: You can't use QuickDig
