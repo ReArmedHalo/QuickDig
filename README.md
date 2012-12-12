@@ -1,0 +1,4 @@
+QuickDig
+========
+
+QuickDig Bukkit Plugin
