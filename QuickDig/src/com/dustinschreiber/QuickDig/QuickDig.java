@@ -45,25 +45,25 @@ public final class QuickDig extends JavaPlugin implements Listener{
     }
     
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-    	if(cmd.getName().equalsIgnoreCase("quick")){
-    		if(!(sender instanceof Player)){
-    			sender.sendMessage("This command can only be run by a player.");
-    		}else{
-    			Player player = (Player) sender;
-    			if(playersActive.containsKey(player.getName())){
-    				sender.sendMessage(ChatColor.GREEN + "QuickDig inactive");
-    				playersActive.remove(player.getName());
-    				return true;
-    			}else{
-	    			if(player.hasPermission("quickdig.use")){
-	    	    		sender.sendMessage(ChatColor.GREEN + "QuickDig active!");
-	    	    		playersActive.put(player.getName(), true);
-	    	    		return true;
+	    	if(cmd.getName().equalsIgnoreCase("quick")){
+	    		if(!(sender instanceof Player)){
+	    			sender.sendMessage("This command can only be run by a player.");
+	    		}else{
+	    			Player player = (Player) sender;
+	    			if(playersActive.containsKey(player.getName())){
+	    				sender.sendMessage(ChatColor.GREEN + "QuickDig inactive");
+	    				playersActive.remove(player.getName());
+	    				return true;
+	    			}else{
+		    			if(player.hasPermission("quickdig.use")){
+		    	    		sender.sendMessage(ChatColor.GREEN + "QuickDig active!");
+		    	    		playersActive.put(player.getName(), true);
+		    	    		return true;
+		    			}
 	    			}
-    			}
-    		}
-    	}
-    	return false;
+	    		}
+	    	}
+	    	return false;
     }
     
     @EventHandler
