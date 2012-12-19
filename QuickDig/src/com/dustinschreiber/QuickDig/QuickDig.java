@@ -26,17 +26,17 @@ public final class QuickDig extends JavaPlugin implements Listener{
     @Override
     public void onEnable(){
         getServer().getPluginManager().registerEvents(this, this);
-    	getLogger().info("[WELCOME] QuickDig " + pluginVersion + " enabled!");
-    	allowedTools.add(257);
-    	allowedTools.add(270);
-    	allowedTools.add(274);
-    	allowedTools.add(278);
-    	allowedTools.add(285);
-    	allowedTools.add(256);
-    	allowedTools.add(268);
-    	allowedTools.add(273);
-    	allowedTools.add(277);
-    	allowedTools.add(284);
+	    	getLogger().info("[WELCOME] QuickDig " + pluginVersion + " enabled!");
+	    	allowedTools.add(257);
+	    	allowedTools.add(270);
+	    	allowedTools.add(274);
+	    	allowedTools.add(278);
+	    	allowedTools.add(285);
+	    	allowedTools.add(256);
+	    	allowedTools.add(268);
+	    	allowedTools.add(273);
+	    	allowedTools.add(277);
+	    	allowedTools.add(284);
     }
  
     @Override
@@ -47,7 +47,7 @@ public final class QuickDig extends JavaPlugin implements Listener{
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 	    	if(cmd.getName().equalsIgnoreCase("quick")){
 	    		if(!(sender instanceof Player)){
-	    			sender.sendMessage("This command can only be run by a player.");
+	    			sender.sendMessage("QuickDig can only be used by a player.");
 	    		}else{
 	    			Player player = (Player) sender;
 	    			if(playersActive.containsKey(player.getName())){
@@ -68,10 +68,31 @@ public final class QuickDig extends JavaPlugin implements Listener{
     
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
-    	Player player = event.getPlayer();
+    		Player player = event.getPlayer();
 		int itemID = player.getItemInHand().getTypeId();
+		boolean allowed = false;
 		if(playersActive.containsKey(player.getName())){
-	    	if(allowedTools.contains(itemID)){
+	    		switch(itemID){
+	    			case 256 : if(player.hasPermission("quickdig.iron.shovel")){ allowed = true; } break;
+	    			case 257 : if(player.hasPermission("quickdig.iron.pickaxe")){ allowed = true; } break;
+	    			case 258 : if(player.hasPermission("quickdig.iron.axe")){ allowed = true; } break;
+	    			case 269 : if(player.hasPermission("quickdig.wooden.shovel")){ allowed = true; } break;
+	    			case 270 : if(player.hasPermission("quickdig.wooden.pickaxe")){ allowed = true; } break;
+	    			case 271 : if(player.hasPermission("quickdig.wooden.axe")){ allowed = true; } break;
+	    			case 273 : if(player.hasPermission("quickdig.stone.shovel")){ allowed = true; } break;
+	    			case 274 : if(player.hasPermission("quickdig.stone.pickaxe")){ allowed = true; } break;
+	    			case 275 : if(player.hasPermission("quickdig.stone.axe")){ allowed = true; } break;
+	    			case 277 : if(player.hasPermission("quickdig.diamond.shovel")){ allowed = true; } break;
+	    			case 278 : if(player.hasPermission("quickdig.diamond.pickaxe")){ allowed = true; } break;
+	    			case 279 : if(player.hasPermission("quickdig.diamond.axe")){ allowed = true; } break;
+	    			case 284 : if(player.hasPermission("quickdig.gold.shovel")){ allowed = true; } break;
+	    			case 285 : if(player.hasPermission("quickdig.gold.pickaxe")){ allowed = true; } break;
+	    			case 286 : if(player.hasPermission("quickdig.gold.axe")){ allowed = true; } break;
+	    			default : allowed = false; break;
+	    		}
+	    		if(allowed == false){
+	    			return;
+	    		}
 	    		Location loc = event.getBlock().getLocation();
 	    		int i = 0;
 	    		String dir = getCardinalDirection(player);
@@ -98,7 +119,6 @@ public final class QuickDig extends JavaPlugin implements Listener{
 			    		}
 		    		}
 	    		}
-			}
 		}
     }
     
